@@ -1,19 +1,30 @@
-export default function FilterContainer() {
+export default function FilterContainer({ filter, setFilter }) {
   return (
-    <>
-      <div className="filter-container">
-        <h2>Filters</h2>
-        <select id="filter-select" aria-label="Category">
-          <option value="">Category</option>
-          <option value="Arts and crafts">Arts & Crafts</option>
-          <option value="Convention">Convention</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Funfair">Funfair</option>
-          <option value="Sports">Sports</option>
-          <option value="Social Group">Social Group</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-    </>
+    <div className="filter-container">
+      <h2>Filters</h2>
+      <select
+        id="filter-select"
+        aria-label="Category"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      >
+        <option value="">All Categories</option>
+        <option value="Art">Art</option>
+        <option value="Music">Music</option>
+        <option value="Books">Books</option>
+        <option value="Food">Food</option>
+        <option value="Travel">Travel</option>
+        <option value="Photography">Photography</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Pets">Pets</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Tech">Technology</option>
+        <option value="Games">Games</option>
+        <option value="Hobbies">Hobbies</option>
+        <option value="Education">Education</option>
+        <option value="Wellness">Wellness</option>
+        <option value="Entertainment">Entertainment</option>
+      </select>
+    </div>
   );
 }

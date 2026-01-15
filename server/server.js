@@ -3,55 +3,25 @@ import express from "express";
 import cors from "cors";
 import { db } from "./.dbConnection.js";
 
-//init express
 const app = express();
-
-//use JSON in our server
 app.use(express.json());
-
-//config cors
 app.use(cors());
-
-//port
 const PORT = 8080;
+
 app.listen(PORT, () => {
   console.info(`Server API is running on port ${PORT}`);
 });
 
-//routing system
-
-//root route
-//route --> http method GET
-// READ data
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the server API. GET comfy!" });
 });
 
-//READ biscuits data
-//route --> http method GET
-//static route
-app.get("/biscuits", async (req, res) => {
+app.get("/posts", async (req, res) => {
   try {
     //query db
     const query = await db.query(
-      `SELECT biscuit_name AS "biscuit name", src AS "image link", description, crunchiness FROM biscuits`
+      `SELECT id, creator, description, category FROM week7posts`
     );
-    console.log(query.rows);
-    res.json(query.rows);
-    // throw new Error(); //to test catch block
-  } catch (error) {
-    console.error(error, "Response failed. Turn off and on");
-    res.status(500).json({ response: "fail" });
-  }
-});
-
-//READ biscuits and customers data
-app.get("/biscuits-customers", async (req, res) => {
-  try {
-    const query = await db.query(
-      `SELECT biscuits.*, customers.* FROM biscuits JOIN customers ON customers.id = biscuits.customer_id`
-    );
-    console.log(query.rows);
     res.json(query.rows);
   } catch (error) {
     console.error(error, "Response failed. Turn off and on");
@@ -59,30 +29,19 @@ app.get("/biscuits-customers", async (req, res) => {
   }
 });
 
-//CREATE new entries in the biscuits table
-//route --> http method POST
-
-app.post("/new-biscuit", async (req, res) => {
+app.post("/new-post", async (req, res) => {
   try {
-    //collect the data to insert
     const data = req.body;
-    //query the database to insert new data
 
-    if (!data || !data.biscuit_name) {
+    if (!data || !data.creator || !data.description || !data.category) {
       return res
         .status(400)
         .json({ request: "fail", message: "Invalid request body" });
     }
 
     const query = await db.query(
-      `INSERT INTO biscuits (biscuit_name, src, description, crunchiness, customer_id) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [
-        data.biscuit_name,
-        data.src,
-        data.description,
-        data.crunchiness,
-        data.customerId,
-      ]
+      `INSERT INTO week7posts (creator, description, category) VALUES ($1, $2, $3) RETURNING *`,
+      [data.creator, data.description, data.category]
     );
     res.status(200).json({ request: "success" });
   } catch (error) {
@@ -93,7 +52,7 @@ app.post("/new-biscuit", async (req, res) => {
 
 /* 
 POSTMAN
-POST Request to http://localhost:8080/new-biscuit
+POST Request to http://localhost:8080/new-post
 Body, RAW, JSON
 
 {
@@ -107,12 +66,12 @@ Body, RAW, JSON
 
 //Delete an entry from biscuit table
 // route --> http method delete
-app.delete("/delete-biscuit/:id", async (req, res) => {
+app.delete("/delete-post/:id", async (req, res) => {
   try {
     //access the value of my id params
     const idParams = req.params.id;
     //query database
-    const query = await db.query(`DELETE FROM biscuits WHERE id = $1`, [
+    const query = await db.query(`DELETE FROM week7posts WHERE id = $1`, [
       idParams,
     ]);
     res.status(200).json({ request: "success" });
@@ -130,19 +89,18 @@ Body, RAW, JSON
 
 //UPDATE an entry
 
-app.put("/update-biscuit/:id", async (req, res) => {
+app.put("/update-post/:id", async (req, res) => {
   try {
     //access the value of my id params
     const idParams = req.params.id;
 
     //We need to store the new values to update current entry
-    const { biscuit_name, src, description, crunchiness, customer_id } =
-      req.body;
+    const { creator, description, category } = req.body;
 
     //query database
     const query = await db.query(
-      `UPDATE biscuits SET biscuit_name = $1, src = $2, description = $3, crunchiness = $4, customer_id = $5 WHERE id = $6`,
-      [biscuit_name, src, description, crunchiness, customer_id, idParams]
+      `UPDATE week7posts SET creator = $1, description = $2, category = $3 WHERE id = $4`,
+      [creator, description, category, idParams]
     );
     res.status(200).json({ request: "success" });
   } catch (error) {
