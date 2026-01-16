@@ -154,11 +154,9 @@ select {
 /* Post Details Page */
 
 .main-post-details-page {
-  flex: 1;
-  max-height: 100%;
-  width: 100%;
+  min-height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 3fr;
+  grid-template-rows: minmax(auto, 1fr) minmax(auto, 3fr);
   justify-content: center;
   align-items: flex-start;
   background-color: rgb(240, 230, 220);
@@ -187,30 +185,25 @@ select {
 /* Form */
 
 .main-container {
-  max-height: 100%;
+  min-height: 100vh;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: rgb(240, 230, 220);
-}
-
-#description,
-#name,
-#category {
-  border: 2px solid rgb(0, 0, 0);
-  background-color: white;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .form-wrapper {
   width: 100%;
   max-width: 50rem;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgb(0, 132, 255);
   border-radius: 0.5rem;
   padding: 2rem 11rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  background-color: rgb(0, 132, 255);
+  box-sizing: border-box;
 }
 
 .form-header h2 {
@@ -238,8 +231,8 @@ select {
   width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1.125rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   outline: none;
 }
@@ -249,7 +242,7 @@ select {
   padding: 0.75rem 1rem;
   font-size: 1.125rem;
   font-weight: 600;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-radius: 0.5rem;
   text-align: center;
   cursor: pointer;
@@ -284,4 +277,68 @@ select {
   font-weight: bold;
   padding: 7px;
   border-radius: 10px;
+}
+
+/* Media */
+
+@media (max-width: 600px) {
+  .main {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+  .filter-container {
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
+  .posts-container,
+  .posts-subtitle {
+    grid-row-start: 2;
+    grid-column-start: 1;
+  }
+  .post-details-page {
+    padding: 50px !important;
+  }
+  .posts-container {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+  nav > a {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .form-wrapper {
+    padding: 2rem 6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-wrapper {
+    padding: 2rem 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .form-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label,
+  .form-group input,
+  .form-group select,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
