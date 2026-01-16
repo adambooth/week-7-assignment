@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetchPosts();
-    const interval = setInterval(fetchPosts, 5000);
+    const interval = setInterval(fetchPosts, 1000);
     console.log("refreshed posts");
     return () => clearInterval(interval);
   }, []);

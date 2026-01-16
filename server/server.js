@@ -20,7 +20,7 @@ app.get("/posts", async (req, res) => {
   try {
     //query db
     const query = await db.query(
-      `SELECT id, creator, description, category FROM week7posts`
+      `SELECT id, creator, description, category, likecount FROM week7posts ORDER BY id ASC`
     );
     res.json(query.rows);
   } catch (error) {
@@ -33,15 +33,21 @@ app.post("/new-post", async (req, res) => {
   try {
     const data = req.body;
 
-    if (!data || !data.creator || !data.description || !data.category) {
+    if (
+      !data ||
+      !data.creator ||
+      !data.description ||
+      !data.category ||
+      !data.likecount
+    ) {
       return res
         .status(400)
         .json({ request: "fail", message: "Invalid request body" });
     }
 
     const query = await db.query(
-      `INSERT INTO week7posts (creator, description, category) VALUES ($1, $2, $3) RETURNING *`,
-      [data.creator, data.description, data.category]
+      `INSERT INTO week7posts (creator, description, category, likecount) VALUES ($1, $2, $3, $4) RETURNING *`,
+      [data.creator, data.description, data.category, data.likecount]
     );
     res.status(200).json({ request: "success" });
   } catch (error) {
@@ -91,18 +97,24 @@ Body, RAW, JSON
 
 app.put("/update-post/:id", async (req, res) => {
   try {
-    //access the value of my id params
     const idParams = req.params.id;
+    const { creator, description, category, likecount } = req.body;
 
-    //We need to store the new values to update current entry
-    const { creator, description, category } = req.body;
-
-    //query database
     const query = await db.query(
-      `UPDATE week7posts SET creator = $1, description = $2, category = $3 WHERE id = $4`,
-      [creator, description, category, idParams]
+      `UPDATE week7posts
+       SET creator = $1, description = $2, category = $3, likecount = $4
+       WHERE id = $5
+       RETURNING *`,
+      [creator, description, category, likecount, idParams]
     );
-    res.status(200).json({ request: "success" });
+
+    if (!query.rows[0]) {
+      return res
+        .status(404)
+        .json({ request: "fail", message: "Post not found" });
+    }
+
+    res.status(200).json({ request: "success", post: query.rows[0] });
   } catch (error) {
     console.error(error, "Request failed");
     res.status(500).json({ request: "fail" });

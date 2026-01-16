@@ -1,11 +1,59 @@
-import { useParams } from "react-router";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router";
 
 export default function PostDetailsPage({ posts }) {
   const { id } = useParams();
-
-  const post = posts.find((p) => p.id.toString() === id);
+  const navigate = useNavigate();
+  const [post, setPost] = useState(posts.find((p) => p.id.toString() === id));
 
   if (!post) return <p>Post not found.</p>;
+
+  const handleLike = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/update-post/${post.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            creator: post.creator,
+            description: post.description,
+            category: post.category,
+            likecount: post.likecount + 1,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.request === "success") {
+        setPost((prev) => ({ ...prev, likecount: prev.likecount + 1 }));
+      }
+    } catch (error) {
+      console.error("Failed to like post:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/delete-post/${post.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.request === "success") {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
+  };
 
   return (
     <div className="main-post-details-page">
@@ -14,6 +62,11 @@ export default function PostDetailsPage({ posts }) {
         <p className="post-content">Creator: {post.creator}</p>
         <p className="post-content">Description: {post.description}</p>
         <p className="post-content">Category: {post.category}</p>
+        <div className="like-delete-container">
+          <p>Likes: {post.likecount}</p>
+          <button onClick={handleLike}>Like Post</button>
+          <button onClick={handleDelete}>Delete Post</button>
+        </div>
       </div>
     </div>
   );

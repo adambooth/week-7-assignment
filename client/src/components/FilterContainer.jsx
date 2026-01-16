@@ -5,7 +5,6 @@ export default function FilterContainer({ filter, setFilter }) {
       <select
         size={10}
         id="filter-select"
-        aria-label="Category"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
