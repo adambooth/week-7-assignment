@@ -1,6 +1,6 @@
-# week-4-assignment
+# week-7-assignment
 
-week-4-assignment
+week-7-assignment
 
 Project Description:
 A forum where people can create and see posts with filtering.
