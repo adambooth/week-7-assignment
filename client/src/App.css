@@ -24,10 +24,12 @@ h1 {
 }
 
 .header > nav > a {
-  margin: 20px;
+  margin: 10px;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 /* Main */
@@ -103,6 +105,18 @@ body {
   margin: 10px;
 }
 
+.post-template:hover {
+  background-color: rgb(1, 100, 192);
+}
+
+option:hover {
+  background-color: rgb(0, 132, 255);
+}
+
+a:hover {
+  background-color: rgb(1, 100, 192);
+}
+
 /* Filter container */
 
 .filter-container {
@@ -173,11 +187,12 @@ select {
 /* Form */
 
 .main-container {
-  min-height: 100%;
+  max-height: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
+  flex-direction: column;
   background-color: rgb(240, 230, 220);
 }
 
@@ -190,10 +205,10 @@ select {
 
 .form-wrapper {
   width: 100%;
-  max-width: 28rem;
+  max-width: 50rem;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 0.5rem;
-  padding: 2rem 1.5rem;
+  padding: 2rem 11rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   background-color: rgb(0, 132, 255);
 }
@@ -267,4 +282,6 @@ select {
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
+  padding: 7px;
+  border-radius: 10px;
 }

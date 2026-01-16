@@ -4,7 +4,7 @@ import "../App.css";
 export default function CreateAPostPage() {
   return (
     <>
-      <div className="main-create-post">
+      <div className="main-container">
         <CreatePostForm />
       </div>
     </>

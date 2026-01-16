@@ -65,6 +65,7 @@ export default function CreatePostForm() {
                 id="name"
                 type="text"
                 name="name"
+                placeholder="Name"
                 value={name}
                 onChange={HandleNameChange}
                 required
@@ -77,6 +78,7 @@ export default function CreatePostForm() {
                 id="description"
                 type="text"
                 name="description"
+                placeholder="Description"
                 value={description}
                 onChange={HandleDescriptionChange}
                 required
