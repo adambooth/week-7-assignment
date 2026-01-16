@@ -11,11 +11,15 @@ export default function PostsContainer({ posts }) {
           posts.map((post) => (
             <div key={post.id} className="post-template">
               <Link to={`/PostDetails/${post.id}`} className="post-link">
-                <p className="post-creator">Creator: {post.creator}</p>
-                <p className="post-description">
+                <p className="post-creator post-content">
+                  Creator: {post.creator}
+                </p>
+                <p className="post-description post-content">
                   Description: {post.description}
                 </p>
-                <p className="post-category">Category: {post.category}</p>
+                <p className="post-category post-content">
+                  Category: {post.category}
+                </p>
               </Link>
             </div>
           ))

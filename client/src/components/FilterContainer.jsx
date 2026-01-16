@@ -1,8 +1,9 @@
 export default function FilterContainer({ filter, setFilter }) {
   return (
     <div className="filter-container">
-      <h2>Filters</h2>
+      <h2 className="filters-title">Filters</h2>
       <select
+        size={10}
         id="filter-select"
         aria-label="Category"
         value={filter}

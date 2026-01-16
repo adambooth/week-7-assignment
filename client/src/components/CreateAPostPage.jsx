@@ -1,10 +1,12 @@
 import CreatePostForm from "./CreatePostForm";
+import "../App.css";
 
 export default function CreateAPostPage() {
   return (
     <>
-      <h1>Create A Post</h1>
-      <CreatePostForm />
+      <div className="main-create-post">
+        <CreatePostForm />
+      </div>
     </>
   );
 }

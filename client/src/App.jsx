@@ -25,7 +25,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainSection posts={posts} />} />
-        <Route path="Create" element={<CreateAPostPage />} />
+        <Route path="/Create" element={<CreateAPostPage />} />
         <Route
           path="PostDetails/:id"
           element={<PostDetailsPage posts={posts} />}

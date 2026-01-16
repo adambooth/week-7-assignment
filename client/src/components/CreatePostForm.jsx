@@ -52,54 +52,71 @@ export default function CreatePostForm() {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="staffName">Name: </label>
-        <input
-          type="text"
-          name="staffName"
-          value={name}
-          required
-          onChange={HandleNameChange}
-        />
+      <div className="main-container">
+        <div className="form-wrapper">
+          <div className="form-header">
+            <h2>Create A Post</h2>
+          </div>
 
-        <label htmlFor="description">Description: </label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          required
-          onChange={HandleDescriptionChange}
-        />
+          <form onSubmit={handleFormSubmit} className="form-content">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                value={name}
+                onChange={HandleNameChange}
+                required
+              />
+            </div>
 
-        <label htmlFor="category">Category: </label>
-        <label htmlFor="category">Category: </label>
-        <select
-          id="category"
-          name="category"
-          value={category}
-          onChange={HandleCategoryChange}
-          required
-        >
-          <option value="">All Categories</option>
-          <option value="Art">Art</option>
-          <option value="Music">Music</option>
-          <option value="Books">Books</option>
-          <option value="Food">Food</option>
-          <option value="Travel">Travel</option>
-          <option value="Photography">Photography</option>
-          <option value="Fitness">Fitness</option>
-          <option value="Pets">Pets</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Tech">Technology</option>
-          <option value="Games">Games</option>
-          <option value="Hobbies">Hobbies</option>
-          <option value="Education">Education</option>
-          <option value="Wellness">Wellness</option>
-          <option value="Entertainment">Entertainment</option>
-        </select>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input
+                id="description"
+                type="text"
+                name="description"
+                value={description}
+                onChange={HandleDescriptionChange}
+                required
+              />
+            </div>
 
-        <button type="submit">Submit</button>
-      </form>
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                name="category"
+                value={category}
+                onChange={HandleCategoryChange}
+                required
+              >
+                <option value="">All Categories</option>
+                <option value="Art">Art</option>
+                <option value="Music">Music</option>
+                <option value="Books">Books</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Photography">Photography</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Pets">Pets</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Tech">Technology</option>
+                <option value="Games">Games</option>
+                <option value="Hobbies">Hobbies</option>
+                <option value="Education">Education</option>
+                <option value="Wellness">Wellness</option>
+                <option value="Entertainment">Entertainment</option>
+              </select>
+            </div>
+
+            <button type="submit" className="submit-button">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

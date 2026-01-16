@@ -10,17 +10,13 @@ export default function PostDetailsPage({ posts }) {
   }
 
   return (
-    <div className="post-details-page">
+    <div className="main-post-details-page">
       <h2>Post Details</h2>
-      <p>
-        <strong>Creator:</strong> {post.creator}
-      </p>
-      <p>
-        <strong>Description:</strong> {post.description}
-      </p>
-      <p>
-        <strong>Category:</strong> {post.category}
-      </p>
+      <div className="post-details-page">
+        <p className="post-content">Creator: {post.creator}</p>
+        <p className="post-content">Description: {post.description}</p>
+        <p className="post-content">Category: {post.category}</p>
+      </div>
     </div>
   );
 }
