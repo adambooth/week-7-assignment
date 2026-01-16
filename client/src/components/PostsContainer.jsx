@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router";
-import { useState } from "react";
 
 export default function PostsContainer({ posts }) {
   const navigate = useNavigate();
@@ -22,8 +21,7 @@ export default function PostsContainer({ posts }) {
 
       const data = await response.json();
       if (data.request === "success") {
-        // Optionally you can refresh posts from parent
-        window.location.reload(); // simplest way for now
+        window.location.reload();
       }
     } catch (error) {
       console.error("Failed to like post:", error);
@@ -40,7 +38,7 @@ export default function PostsContainer({ posts }) {
       );
       const data = await response.json();
       if (data.request === "success") {
-        window.location.reload(); // simplest way
+        window.location.reload();
       }
     } catch (error) {
       console.error("Failed to delete post:", error);
@@ -68,10 +66,28 @@ export default function PostsContainer({ posts }) {
                 </p>
               </Link>
               <div className="like-delete-container">
-                <p> Likes : {post.likecount}</p>
-                <button onClick={() => handleLike(post)}>Like Post</button>
-                <button onClick={() => handleDelete(post.id)}>
-                  Delete Post
+                <p className="likecount"> Likes : {post.likecount}</p>
+                <button
+                  className="like-delete-btn"
+                  onClick={() => handleLike(post)}
+                >
+                  <img
+                    width="50"
+                    height="50"
+                    src="https://img.icons8.com/pastel-glyph/64/facebook-like--v1.png"
+                    alt="facebook-like--v1"
+                  />
+                </button>
+                <button
+                  className="like-delete-btn"
+                  onClick={() => handleDelete(post.id)}
+                >
+                  <img
+                    width="50"
+                    height="50"
+                    src="https://img.icons8.com/carbon-copy/50/filled-trash.png"
+                    alt="filled-trash"
+                  />
                 </button>
               </div>
             </div>

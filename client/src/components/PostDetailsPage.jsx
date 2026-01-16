@@ -63,9 +63,23 @@ export default function PostDetailsPage({ posts }) {
         <p className="post-content">Description: {post.description}</p>
         <p className="post-content">Category: {post.category}</p>
         <div className="like-delete-container">
-          <p>Likes: {post.likecount}</p>
-          <button onClick={handleLike}>Like Post</button>
-          <button onClick={handleDelete}>Delete Post</button>
+          <p className="likecount">Likes: {post.likecount}</p>
+          <button className="like-delete-btn" onClick={handleLike}>
+            <img
+              width="50"
+              height="50"
+              src="https://img.icons8.com/pastel-glyph/64/facebook-like--v1.png"
+              alt="facebook-like--v1"
+            />
+          </button>
+          <button className="like-delete-btn" onClick={handleDelete}>
+            <img
+              width="50"
+              height="50"
+              src="https://img.icons8.com/carbon-copy/50/filled-trash.png"
+              alt="filled-trash"
+            />
+          </button>
         </div>
       </div>
     </div>

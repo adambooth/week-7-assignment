@@ -123,6 +123,17 @@ a:hover {
   display: flex;
   padding: 10px;
   justify-content: space-between;
+  align-items: center;
+}
+
+.like-delete-btn {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.likecount {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* Filter container */
