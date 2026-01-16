@@ -11,18 +11,23 @@ import { useState, useEffect } from "react";
 function App() {
   const [posts, setPosts] = useState([]);
 
+  const fetchPosts = async () => {
+    const response = await fetch("http://localhost:8080/posts");
+    const data = await response.json();
+    setPosts(data);
+    console.log("refreshed posts on timer");
+  };
+
   useEffect(() => {
-    async function fetchPosts() {
-      const response = await fetch("http://localhost:8080/posts");
-      const data = await response.json();
-      setPosts(data);
-    }
     fetchPosts();
+    const interval = setInterval(fetchPosts, 5000);
+    console.log("refreshed posts");
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      <Header />
+      <Header refreshPosts={fetchPosts} />
       <Routes>
         <Route path="/" element={<MainSection posts={posts} />} />
         <Route path="/Create" element={<CreateAPostPage />} />

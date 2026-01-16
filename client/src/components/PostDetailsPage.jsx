@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 export default function PostDetailsPage({ posts }) {
   const { id } = useParams();
 
-  // Find the post from props
   const post = posts.find((p) => p.id.toString() === id);
 
   if (!post) return <p>Post not found.</p>;
