@@ -12,7 +12,9 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("http://localhost:8080/posts");
+    const response = await fetch(
+      "https://week-7-assignment-g4db.onrender.com/posts"
+    );
     const data = await response.json();
     setPosts(data);
     console.log("refreshed posts on timer");

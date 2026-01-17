@@ -27,13 +27,16 @@ export default function CreatePostForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/new-post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        "https://week-7-assignment-g4db.onrender.com/new-post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
 
       const result = await response.json();
 

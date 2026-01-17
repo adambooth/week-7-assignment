@@ -58,7 +58,7 @@ app.post("/new-post", async (req, res) => {
 
 /* 
 POSTMAN
-POST Request to http://localhost:8080/new-post
+POST Request to https://week-7-assignment-g4db.onrender.com/new-post
 Body, RAW, JSON
 
 {
@@ -89,7 +89,7 @@ app.delete("/delete-post/:id", async (req, res) => {
 
 /* 
 POSTMAN
-DELETE Request to http://localhost:8080/delete-biscuit/8
+DELETE Request to https://week-7-assignment-g4db.onrender.com/delete-biscuit/8
 Body, RAW, JSON
 */
 
@@ -123,7 +123,7 @@ app.put("/update-post/:id", async (req, res) => {
 
 /* 
 POSTMAN
-PUT Request to http://localhost:8080/update-biscuit/5
+PUT Request to https://week-7-assignment-g4db.onrender.com/update-biscuit/5
 Body, RAW, JSON
 {
   "biscuitName": "Chocolate Biscuit",

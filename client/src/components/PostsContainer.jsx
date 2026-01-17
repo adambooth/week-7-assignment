@@ -6,7 +6,7 @@ export default function PostsContainer({ posts }) {
   const handleLike = async (post) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/update-post/${post.id}`,
+        `https://week-7-assignment-g4db.onrender.com/update-post/${post.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -31,7 +31,7 @@ export default function PostsContainer({ posts }) {
   const handleDelete = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/delete-post/${postId}`,
+        `https://week-7-assignment-g4db.onrender.com/delete-post/${postId}`,
         {
           method: "DELETE",
         }

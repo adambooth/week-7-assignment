@@ -11,7 +11,7 @@ export default function PostDetailsPage({ posts }) {
   const handleLike = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/update-post/${post.id}`,
+        `https://week-7-assignment-g4db.onrender.com/update-post/${post.id}`,
         {
           method: "PUT",
           headers: {
@@ -39,7 +39,7 @@ export default function PostDetailsPage({ posts }) {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/delete-post/${post.id}`,
+        `https://week-7-assignment-g4db.onrender.com/delete-post/${post.id}`,
         {
           method: "DELETE",
         }
