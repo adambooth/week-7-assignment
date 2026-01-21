@@ -24,6 +24,7 @@ export default function CreatePostForm() {
       creator: name,
       description: description,
       category: category,
+      likecount: 0,
     };
 
     try {
@@ -35,7 +36,7 @@ export default function CreatePostForm() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(postData),
-        }
+        },
       );
 
       const result = await response.json();

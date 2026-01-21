@@ -18,14 +18,13 @@ app.get("/", (req, res) => {
 
 app.get("/posts", async (req, res) => {
   try {
-    //query db
     const query = await db.query(
-      `SELECT id, creator, description, category, likecount FROM week7posts ORDER BY id ASC`
+      `SELECT id, creator, description, category, likecount FROM week7posts ORDER BY id ASC`,
     );
     res.json(query.rows);
   } catch (error) {
-    console.error(error, "Response failed. Turn off and on");
-    res.status(500).json({ response: "fail" });
+    console.error("Error fetching posts:", error.message);
+    res.status(500).json({ response: "fail", error: error.message });
   }
 });
 
@@ -34,11 +33,10 @@ app.post("/new-post", async (req, res) => {
     const data = req.body;
 
     if (
-      !data ||
-      !data.creator ||
-      !data.description ||
-      !data.category ||
-      !data.likecount
+      data.creator === undefined ||
+      data.description === undefined ||
+      data.category === undefined ||
+      data.likecount === undefined
     ) {
       return res
         .status(400)
@@ -47,9 +45,10 @@ app.post("/new-post", async (req, res) => {
 
     const query = await db.query(
       `INSERT INTO week7posts (creator, description, category, likecount) VALUES ($1, $2, $3, $4) RETURNING *`,
-      [data.creator, data.description, data.category, data.likecount]
+      [data.creator, data.description, data.category, data.likecount],
     );
-    res.status(200).json({ request: "success" });
+
+    res.status(200).json({ request: "success", post: query.rows[0] });
   } catch (error) {
     console.error(error, "Request failed. Turn off and on");
     res.status(500).json({ request: "fail" });
@@ -105,7 +104,7 @@ app.put("/update-post/:id", async (req, res) => {
        SET creator = $1, description = $2, category = $3, likecount = $4
        WHERE id = $5
        RETURNING *`,
-      [creator, description, category, likecount, idParams]
+      [creator, description, category, likecount, idParams],
     );
 
     if (!query.rows[0]) {
